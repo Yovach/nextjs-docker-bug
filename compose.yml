@@ -1,0 +1,22 @@
+services:
+  nodejs:
+    build:
+      context: .
+      no_cache: true
+    user: node
+    develop:
+      watch:
+        - action: sync
+          path: .
+          target: /app
+          ignore:
+            - node_modules/
+        - action: rebuild
+          path: package.json
+    volumes:
+      - dependencies:/app/node_modules
+    ports:
+      - "3000:3000"
+
+volumes:
+  dependencies: {}
